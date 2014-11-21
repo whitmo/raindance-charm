@@ -1,0 +1,28 @@
+#!/bin/bash
+set -e
+
+source /opt/.venv/bin/activate
+
+AWS_SECRET=`config-get aws_secret`
+AWS_KEY=`config-get aws_key`
+
+export AWS_ACCESS_KEY=$AWS_KEY
+export AWS_SECRET_KEY=$AWS_SECRET
+
+INST_ID=`cat /opt/.instance-id`
+
+cd /opt/raindance/release
+
+TIME=`date`
+LOG=/var/log/raindance.log
+echo "${TIME} NEW RD" >> $LOG
+
+echo $VIRTUAL_ENV
+release=`config-get release`
+CMD="./run-aws-remote.sh ${release} ${INST_ID}"
+
+export
+
+echo $CMD
+$CMD | tee $LOG &
+echo $! > /var/run/rd.pid

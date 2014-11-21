@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -e
+
+key=`config-get aws_key`
+secret=`config-get aws_secret`
+release=`config-get release`
+pubkey=`config-get pubkey`
+
+SSHDIR=/home/ubuntu/.juju/ssh
+
+if [[ ! -d $SSHDIR ]]
+then
+    mkdir -p $SSHDIR
+fi
+
+`config-get privkey` > "${SSHDIR}/juju_id_rsa"
+echo $pubkey > "${SSHDIR}/juju_id_rsa.pub"
+
+echo "Release: ${release} Creds:${key}:${secret}"

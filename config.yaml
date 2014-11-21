@@ -1,0 +1,11 @@
+options:
+  aws_secret:
+    type: string
+  aws_key:
+    type: string
+  release:
+    type: string
+  pubkey:
+    type: string
+  privkey:
+    type: string

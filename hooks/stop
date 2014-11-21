@@ -1,0 +1,4 @@
+#!/bin/bash
+
+kill `cat /var/run/rd.pid`
+exit 0

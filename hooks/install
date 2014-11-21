@@ -1,0 +1,26 @@
+#!/bin/bash
+set -e
+
+apt-get install -y git python-dev python-boto
+apt-get install -y python-virtualenv
+
+RD=/opt/raindance
+
+venv=/opt/.venv
+
+if [[ ! -d $venv ]]
+then
+    virtualenv $venv
+fi
+
+source /opt/.venv/bin/activate
+
+if [[ ! -d $RD ]]
+then
+    pip install --src=/opt/ -e git+https://github.com/whitmo/raindance.git#egg=raindance
+fi
+
+pip install ansible
+pip install boto
+
+echo $RANDOM > /opt/.instance-id
