@@ -21,8 +21,5 @@ echo $VIRTUAL_ENV
 release=`config-get release`
 CMD="./run-aws-remote.sh ${release} ${INST_ID}"
 
-export
-
 echo $CMD
-$CMD | tee $LOG &
-echo $! > /var/run/rd.pid
+($CMD | tee $LOG) && wait $!
