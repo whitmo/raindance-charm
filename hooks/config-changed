@@ -14,7 +14,10 @@ then
     mkdir -p $SSHDIR
 fi
 
-`config-get privkey` > "${SSHDIR}/juju_id_rsa"
+PRIVKEY="${SSHDIR}/juju_id_rsa"
+config-get privkey > $PRIVKEY
+chmod 600 $PRIVKEY
+
 echo $pubkey > "${SSHDIR}/juju_id_rsa.pub"
 
 echo "Release: ${release} Creds:${key}:${secret}"
