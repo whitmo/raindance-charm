@@ -21,3 +21,8 @@ chmod 600 $PRIVKEY
 echo $pubkey > "${SSHDIR}/juju_id_rsa.pub"
 
 echo "Release: ${release} Creds:${key}:${secret}"
+
+cat > ~/.ssh/sshconfig <<'EOM'
+Host *
+    StrictHostKeyChecking no
+EOM
